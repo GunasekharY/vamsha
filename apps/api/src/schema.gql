@@ -1,0 +1,220 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddParentChildInput {
+  childId: String!
+  familyId: String!
+  parentId: String!
+}
+
+type AuthTokensType {
+  accessToken: String!
+  refreshToken: String!
+  user: UserType!
+}
+
+input ConfirmPhotoUploadInput {
+  familyId: String!
+  objectKey: String!
+  personId: String!
+}
+
+type CousinPairType {
+  label: String!
+  personAId: String!
+  personBId: String!
+}
+
+input CreateFamilyInput {
+  name: String!
+}
+
+input CreateMarriageInput {
+  childIds: [String!]
+  familyId: String!
+  location: String
+  marriageDate: String
+  notes: String
+  spouseIds: [String!]!
+}
+
+input CreatePersonInput {
+  city: String
+  country: String
+  dateOfBirth: String
+  dateOfDeath: String
+  displayName: String!
+  familyId: String!
+  firstName: String
+  gender: Gender
+  lastName: String
+  middleName: String
+  village: String
+  visibleFields: [String!]
+}
+
+type FamilyGraphType {
+  cousinPairs: [CousinPairType!]!
+  marriageChildEdges: [MarriageChildEdgeType!]!
+  marriages: [MarriageType!]!
+  parentChildEdges: [ParentChildEdgeType!]!
+  persons: [PersonType!]!
+  spouseMarriageEdges: [SpouseMarriageEdgeType!]!
+}
+
+enum FamilyRole {
+  ADMIN
+  EDITOR
+  OWNER
+  VIEWER
+}
+
+type FamilyType {
+  createdAt: String!
+  id: String!
+  myRole: FamilyRole!
+  name: String!
+  updatedAt: String!
+}
+
+enum Gender {
+  FEMALE
+  MALE
+  OTHER
+  UNKNOWN
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type MarriageChildEdgeType {
+  childId: String!
+  marriageId: String!
+}
+
+type MarriageType {
+  familyId: String!
+  id: String!
+  isActive: Boolean!
+  location: String
+  marriageDate: String
+  notes: String
+  spouseIds: [String!]!
+}
+
+type Mutation {
+  addParentChild(input: AddParentChildInput!): Boolean!
+  confirmPhotoUpload(input: ConfirmPhotoUploadInput!): PersonType!
+  createFamily(input: CreateFamilyInput!): FamilyType!
+  createMarriage(input: CreateMarriageInput!): MarriageType!
+  createPerson(input: CreatePersonInput!): PersonType!
+  deletePerson(familyId: String!, personId: String!): Boolean!
+  login(input: LoginInput!): AuthTokensType!
+  logout(input: RefreshInput!): Boolean!
+  refreshTokens(input: RefreshInput!): AuthTokensType!
+  register(input: RegisterInput!): AuthTokensType!
+  requestPhotoUpload(input: RequestPhotoUploadInput!): PhotoUploadRequestType!
+  updatePerson(input: UpdatePersonInput!): PersonType!
+}
+
+type ParentChildEdgeType {
+  childId: String!
+  parentId: String!
+}
+
+type PersonType {
+  biography: String
+  city: String
+  country: String
+  createdAt: String!
+  dateOfBirth: String
+  dateOfDeath: String
+  displayName: String!
+  email: String
+  familyId: String!
+  firstName: String
+  gender: Gender
+  id: String!
+  lastName: String
+  middleName: String
+  notes: String
+  occupation: String
+  phone: String
+  photoUrl: String
+  updatedAt: String!
+  village: String
+  visibleFields: [String!]!
+}
+
+enum PhotoMimeType {
+  JPEG
+  PNG
+  WEBP
+}
+
+type PhotoUploadRequestType {
+  expiresAt: String!
+  objectKey: String!
+  uploadUrl: String!
+}
+
+type Query {
+  familyGraph(familyId: String!): FamilyGraphType!
+  me: UserType!
+  myFamilies: [FamilyType!]!
+  person(familyId: String!, forEdit: Boolean = false, personId: String!): PersonType!
+}
+
+input RefreshInput {
+  refreshToken: String!
+}
+
+input RegisterInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+input RequestPhotoUploadInput {
+  contentLength: Float!
+  contentType: PhotoMimeType!
+  familyId: String!
+  personId: String!
+}
+
+type SpouseMarriageEdgeType {
+  marriageId: String!
+  spouseId: String!
+}
+
+input UpdatePersonInput {
+  biography: String
+  city: String
+  country: String
+  dateOfBirth: String
+  dateOfDeath: String
+  displayName: String
+  email: String
+  familyId: String!
+  firstName: String
+  gender: Gender
+  lastName: String
+  middleName: String
+  notes: String
+  occupation: String
+  personId: String!
+  phone: String
+  photoUrl: String
+  village: String
+  visibleFields: [String!]
+}
+
+type UserType {
+  createdAt: String!
+  email: String!
+  id: String!
+  name: String!
+}
